@@ -1,6 +1,5 @@
 
-
-from re import M
+from operator import length_hint
 
 
 class Node:
@@ -59,6 +58,7 @@ class DoublyLinkedList:
         self.length+=1
 
     def pop_first(self):
+        temp=self.head
         if self.length==0:
             return None
         elif self.length==1:
@@ -68,6 +68,7 @@ class DoublyLinkedList:
             self.head=self.head.next
             self.head.prev=None
         self.length-=1
+        return temp
 
     def get(self,index):
         if index<0 or index >=self.length:
@@ -120,10 +121,57 @@ class DoublyLinkedList:
             temp=None
             self.length-=1
 
+    def reverse(self):
+        if self.length==0:
+            return None
+        current=self.head
+        temp=None
+        while current:
+            temp=current.prev
+            current.prev=current.next
+            current.next=temp
+            current=current.prev
+        temp=self.tail
+        self.tail=self.head
+        self.head=temp
 
-my_doubly_linked_list=DoublyLinkedList(21)
-my_doubly_linked_list.append(35)
-my_doubly_linked_list.append(47)
+    def is_palindrome(self):
+        if self.length==0 or self.length==1:
+            return True
+        else:
+            forward=self.head
+            backward=self.tail
+            for _ in range(self.length//2):
+                if forward.value!=backward.value:
+                    return False
+            return True
 
-my_doubly_linked_list.remove(1)
+    def partition_list(self,value):
+        if self.length==0:
+            return None
+        lower=DoublyLinkedList(0)
+        greater=DoublyLinkedList(0)
+        current=self.head
+        while current:
+            if current.value<value:
+                lower.append(current.value)
+            else:
+                greater.append(current.value)
+            current=current.next
+        dll=DoublyLinkedList(0)
+        while lower.length:
+            dll.append(lower.pop_first().value)
+        while greater.length:
+            dll.append(greater.pop_first().value)
+        self.head=dll.head
+        self.tail=dll.tail
+        self.length=dll.length
+
+
+my_doubly_linked_list=DoublyLinkedList(141)
+my_doubly_linked_list.append(552)
+my_doubly_linked_list.append(13)
+my_doubly_linked_list.append(21)
+my_doubly_linked_list.append(25)
+my_doubly_linked_list.partition_list(21)
 my_doubly_linked_list.print_list()

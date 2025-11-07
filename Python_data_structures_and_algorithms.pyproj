@@ -23,6 +23,7 @@
   <ItemGroup>
     <Compile Include="binary_search.py" />
     <Compile Include="doubly_linked_list.py" />
+    <Compile Include="hash_tables.py" />
     <Compile Include="linked_list.py" />
     <Compile Include="recursion.py" />
   </ItemGroup>
