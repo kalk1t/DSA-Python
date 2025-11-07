@@ -145,28 +145,33 @@ class DoublyLinkedList:
                 if forward.value!=backward.value:
                     return False
             return True
-
+    
     def partition_list(self,value):
-        if self.length==0:
+        if not self.head:
             return None
-        lower=DoublyLinkedList(0)
-        greater=DoublyLinkedList(0)
+        dummy1=Node(0)
+        dummy2=Node(0)
+        prev1=dummy1
+        prev2=dummy2
         current=self.head
+
         while current:
             if current.value<value:
-                lower.append(current.value)
+                prev1.next=current
+                current.prev=prev1
+                prev1=current
             else:
-                greater.append(current.value)
+                prev2.next=current
+                current.prev=prev2
+                prev2=current
             current=current.next
-        dll=DoublyLinkedList(0)
-        while lower.length:
-            dll.append(lower.pop_first().value)
-        while greater.length:
-            dll.append(greater.pop_first().value)
-        self.head=dll.head
-        self.tail=dll.tail
-        self.length=dll.length
 
+        prev2.next=None
+        prev1.next=dummy2.next
+        if dummy2.next:
+                dummy2.next.prev=prev1
+        self.head=dummy1.next
+        self.head.prev=None
 
 my_doubly_linked_list=DoublyLinkedList(141)
 my_doubly_linked_list.append(552)
