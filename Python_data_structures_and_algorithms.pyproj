@@ -26,6 +26,7 @@
     <Compile Include="hash_tables.py" />
     <Compile Include="linked_list.py" />
     <Compile Include="recursion.py" />
+    <Compile Include="stack.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
